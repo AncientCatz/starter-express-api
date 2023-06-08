@@ -6,6 +6,11 @@ const port = 3000; // Choose a port number
 
 // Middleware to log request details and forward to Discord webhook
 app.use((req, res, next) => {
+  if (req.path === '/favicon.ico') {
+    next();
+    return;
+  }
+
   const logMessage = `
     Request path: ${req.path}
     Query parameters: ${JSON.stringify(req.query)}
